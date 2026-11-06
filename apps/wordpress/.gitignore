@@ -8,8 +8,11 @@ db-data/
 # Core وردپرس (از Docker image می‌آید)
 wp-admin/
 wp-includes/
-*.php
-!wp-content/plugins/nextsafar-webhook/*.php
+wp-config.php
+wp-*.php
+xmlrpc.php
+license.txt
+readme.html
 
 # فایل‌های موقت و cache
 wp-content/cache/
@@ -17,6 +20,7 @@ wp-content/upgrade/
 wp-content/upgrade-temp/
 wp-content/backup-db/
 wp-content/backups/
+wp-content/blogs.dir/
 
 # آپلودهای کاربران (در production در storage جداگانه)
 wp-content/uploads/
@@ -25,12 +29,13 @@ wp-content/uploads/
 wp-content/languages/
 
 # ═══════════════════════════════════════════════════════════════
-# Themes - فقط theme پیش‌فرض وردپرس، theme اختصاصی نداریم
+# Themes - قالب‌های پیش‌فرض وردپرس
 # ═══════════════════════════════════════════════════════════════
 wp-content/themes/twentytwentyfour/
 wp-content/themes/twentytwentythree/
 wp-content/themes/twentytwentyfive/
 wp-content/themes/twentytwentytwo/
+wp-content/themes/twentytwentyone/
 wp-content/themes/index.php
 
 # ═══════════════════════════════════════════════════════════════
@@ -41,10 +46,98 @@ wp-content/plugins/akismet/
 wp-content/plugins/index.php
 
 # ═══════════════════════════════════════════════════════════════
-# تنظیمات و لاگ‌ها
+# IDE & Editor Files
 # ═══════════════════════════════════════════════════════════════
-wp-config.php
-*.log
-*.sql
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ═══════════════════════════════════════════════════════════════
+# Environment & Secrets (NEVER COMMIT)
+# ═══════════════════════════════════════════════════════════════
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+wp-config-local.php
+
+# ═══════════════════════════════════════════════════════════════
+# Build & Dependencies
+# ═══════════════════════════════════════════════════════════════
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ═══════════════════════════════════════════════════════════════
+# Logs & Debug
+# ═══════════════════════════════════════════════════════════════
+*.log
+error_log
+debug.log
+php_error_log
+
+# ═══════════════════════════════════════════════════════════════
+# Testing & Coverage
+# ═══════════════════════════════════════════════════════════════
+coverage/
+.phpunit.result.cache
+.phpcs.xml
+.phpunit.xml
+tests/
+
+# ═══════════════════════════════════════════════════════════════
+# Distribution
+# ═══════════════════════════════════════════════════════════════
+*.zip
+*.tar.gz
+*.rar
+/build/
+/dist/
+/release/
+
+# ═══════════════════════════════════════════════════════════════
+# Temporary Files
+# ═══════════════════════════════════════════════════════════════
+*.tmp
+*.bak
+*.backup
+.cache/
+tmp/
+temp/
+
+# ═══════════════════════════════════════════════════════════════
+# Database Dumps (NEVER COMMIT)
+# ═══════════════════════════════════════════════════════════════
+*.sql
+*.sql.gz
+*.sql.bz2
+dump.sql
+backup.sql
+database.sql
+
+# ═══════════════════════════════════════════════════════════════
+# Local secrets (never commit)
+# ═══════════════════════════════════════════════════════════════
+inc/secrets.local.php
+
+# ═══════════════════════════════════════════════════════════════
+# ✅ توجه: پلاگین nextsafar-webhook کاملاً commit می‌شود
+# هیچ قانونی برای آن نگذارید!
+# ═══════════════════════════════════════════════════════════════
