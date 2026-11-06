@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # MySQL برای وردپرس (دیتابیس دوم - مجزا از بک‌اند)
+  wp_mysql:
+    image: mysql:8.0
+    container_name: nextsafar_wp_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: wp_root_password_2026
+      MYSQL_DATABASE: wp_nextsafar
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password_2026
+    volumes:
+      - ./db-data:/var/lib/mysql
+    ports:
+      - "3307:3306"  # پورت متفاوت از MySQL سیستم
+    networks:
+      - wp_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # WordPress
+  wordpress:
+    image: wordpress:latest
+    container_name: nextsafar_wordpress
+    restart: unless-stopped
+    depends_on:
+      wp_mysql:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: wp_mysql:3306
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password_2026
+      WORDPRESS_DB_NAME: wp_nextsafar
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    ports:
+      - "8080:80"
+    networks:
+      - wp_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # دسترسی به بک‌اند هاست اول
+
+networks:
+  wp_network:
+    driver: bridge
+
+volumes:
+  wp_data:

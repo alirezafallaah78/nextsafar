@@ -1,0 +1,50 @@
+# ═══════════════════════════════════════════════════════════════
+# WordPress - فایل‌هایی که نباید در Git باشند
+# ═══════════════════════════════════════════════════════════════
+
+# دیتابیس MySQL (داده‌های production)
+db-data/
+
+# Core وردپرس (از Docker image می‌آید)
+wp-admin/
+wp-includes/
+*.php
+!wp-content/plugins/nextsafar-webhook/*.php
+
+# فایل‌های موقت و cache
+wp-content/cache/
+wp-content/upgrade/
+wp-content/upgrade-temp/
+wp-content/backup-db/
+wp-content/backups/
+
+# آپلودهای کاربران (در production در storage جداگانه)
+wp-content/uploads/
+
+# زبان‌ها (قابل دانلود از wordpress.org)
+wp-content/languages/
+
+# ═══════════════════════════════════════════════════════════════
+# Themes - فقط theme پیش‌فرض وردپرس، theme اختصاصی نداریم
+# ═══════════════════════════════════════════════════════════════
+wp-content/themes/twentytwentyfour/
+wp-content/themes/twentytwentythree/
+wp-content/themes/twentytwentyfive/
+wp-content/themes/twentytwentytwo/
+wp-content/themes/index.php
+
+# ═══════════════════════════════════════════════════════════════
+# Plugins - همه پلاگین‌های پیش‌فرض به جز پلاگین ما
+# ═══════════════════════════════════════════════════════════════
+wp-content/plugins/hello.php
+wp-content/plugins/akismet/
+wp-content/plugins/index.php
+
+# ═══════════════════════════════════════════════════════════════
+# تنظیمات و لاگ‌ها
+# ═══════════════════════════════════════════════════════════════
+wp-config.php
+*.log
+*.sql
+.DS_Store
+Thumbs.db
